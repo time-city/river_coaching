@@ -22,6 +22,24 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   title: "RIVER | Coaching Profile",
   description: "Magazine High-Impact Athletic Coaching Profile",
+  openGraph: {
+    title: "RIVER | Coaching Profile",
+    description: "Magazine High-Impact Athletic Coaching Profile",
+    images: [
+      {
+        url: "/discipline.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "RIVER Coaching",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RIVER | Coaching Profile",
+    description: "Magazine High-Impact Athletic Coaching Profile",
+    images: ["/discipline.jpeg"],
+  },
 };
 
 export default function RootLayout({
