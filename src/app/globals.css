@@ -1,26 +1,60 @@
 @import "tailwindcss";
+@config "../../tailwind.config.ts";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-background: #1c1c1c;
+  --color-surface: #1c1c1c;
+  --color-text: #ffffff;
+  --color-accent: #a1a1aa;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: theme('colors.background');
+  color: theme('colors.text');
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px !important;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@keyframes breatheColor {
+  0%, 100% {
+    filter: grayscale(1);
+    transform: scale(1);
+  }
+  50% {
+    filter: grayscale(0);
+    transform: scale(1.05);
+  }
+}
+
+.animate-breathe-color {
+  animation: breatheColor 8s ease-in-out infinite;
+}
+
+@keyframes ig-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-ig-gradient {
+  background-size: 200% 200%;
+  animation: ig-gradient-shift 3s ease infinite;
 }
