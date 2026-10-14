@@ -130,7 +130,13 @@ export default function Quiz() {
       </div>
       
       <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 relative z-10 min-h-[50vh] flex flex-col justify-center">
-        <div className={`mb-4 sm:mb-8 md:mb-12 ${currentStep >= quizQuestions.length ? 'hidden sm:block' : ''}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className={`mb-4 sm:mb-8 md:mb-12 ${currentStep >= quizQuestions.length ? 'hidden sm:block' : ''}`}
+        >
           <h2 className="text-3xl sm:text-6xl md:text-8xl font-impact text-center uppercase tracking-tight leading-[1.15] md:leading-tight mb-3 md:mb-8">
             {t.quiz.title}
           </h2>
@@ -147,7 +153,7 @@ export default function Quiz() {
           <p className="text-right text-accent mt-2 text-xs sm:text-sm">
             {t.quiz.step} {Math.min(currentStep + 1, quizQuestions.length)} {t.quiz.of} {quizQuestions.length}
           </p>
-        </div>
+        </motion.div>
 
         <div className="relative w-full overflow-hidden min-h-[260px]">
           <AnimatePresence mode="wait">

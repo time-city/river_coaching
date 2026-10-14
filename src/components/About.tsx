@@ -14,10 +14,10 @@ export default function About() {
           
           {/* Left Column - Image */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative w-full aspect-[4/5] bg-zinc-900 rounded-sm overflow-hidden"
           >
             {/* Replace src with a real training image. Using placeholder logic for high-res images */}
@@ -32,10 +32,10 @@ export default function About() {
 
           {/* Right Column - Text */}
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col justify-center"
           >
             <h2 className="font-impact text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[1.15] md:leading-[1.1] mb-6">

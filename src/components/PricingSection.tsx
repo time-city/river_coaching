@@ -55,17 +55,29 @@ export default function PricingSection() {
   return (
     <section id="pricing-section" className="w-full bg-[#0a0a0a] py-20 md:py-24 px-4 sm:px-6 md:px-8 relative z-10 border-t border-zinc-900 text-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10 md:mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-10 md:mb-16"
+        >
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-impact uppercase tracking-wider leading-[1.15] md:leading-tight mb-4 md:mb-6">
             {t.pricing.title}
           </h2>
           <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto px-2">
             {t.pricing.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Responsive Custom Tabs - Perfectly proportional 3-column pill bar */}
-        <div className="w-full flex justify-center mb-10 md:mb-16 px-1">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full flex justify-center mb-10 md:mb-16 px-1"
+        >
           <div className="grid grid-cols-3 w-full max-w-sm sm:max-w-xl p-1 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-2xl gap-1">
             {tabs.map((tab) => (
               <button
@@ -86,10 +98,16 @@ export default function PricingSection() {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Pricing Content */}
-        <div className="min-h-[400px]">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="min-h-[400px]"
+        >
           <AnimatePresence mode="wait">
             {activeTab === "offline" && (
               <motion.div
@@ -221,7 +239,7 @@ export default function PricingSection() {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

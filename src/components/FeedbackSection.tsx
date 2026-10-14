@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from './LanguageContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -35,17 +36,27 @@ export default function FeedbackSection() {
 
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-12 md:mb-16"
+        >
           <h2 className="font-impact text-4xl sm:text-5xl md:text-6xl text-white tracking-wider uppercase leading-[1.15] md:leading-tight mb-4">
             {t.feedback.title}
           </h2>
           <p className="text-zinc-400 uppercase tracking-[0.2em] text-xs sm:text-sm md:text-base font-bold">
             {t.feedback.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Feedback Slider */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="w-full relative group/slider"
           onMouseEnter={() => swiperInstance?.autoplay?.stop()}
           onMouseLeave={() => swiperInstance?.autoplay?.start()}
@@ -137,7 +148,7 @@ export default function FeedbackSection() {
             ))}
           </Swiper>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

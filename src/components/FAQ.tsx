@@ -19,16 +19,26 @@ export default function FAQ() {
     <section className="w-full bg-[#0a0a0a] py-24 px-4 md:px-6 border-t border-zinc-900 relative">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-impact text-center uppercase tracking-wider text-white leading-[1.15] md:leading-tight mb-12 md:mb-16">
+        <motion.h2 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-impact text-center uppercase tracking-wider text-white leading-[1.15] md:leading-tight mb-12 md:mb-16"
+        >
           {t.faq.title}
-        </h2>
+        </motion.h2>
 
         <div className="space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div 
+              <motion.div 
                 key={index} 
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 className={`w-full border ${isOpen ? 'border-zinc-600 bg-white/5' : 'border-zinc-800 bg-[#0a0a0a]'} rounded-2xl overflow-hidden transition-all duration-300 shadow-lg`}
               >
                 <button
@@ -57,7 +67,7 @@ export default function FAQ() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
         </div>

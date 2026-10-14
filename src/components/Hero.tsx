@@ -24,7 +24,13 @@ export default function Hero() {
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 h-full flex flex-col md:block">
 
         {/* Left Content Panel */}
-        <div className="flex flex-col items-start md:absolute md:left-6 lg:left-12 md:top-1/2 md:-translate-y-1/2 z-20 mt-4 md:mt-0 w-full md:w-[35%] lg:w-[30%]">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col items-start md:absolute md:left-6 lg:left-12 md:top-1/2 md:-translate-y-1/2 z-20 mt-4 md:mt-0 w-full md:w-[35%] lg:w-[30%]"
+        >
           <h2 className="font-impact text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-[1.15] md:leading-[1.1] uppercase text-white">
             {t.hero.title1}<br />
             {t.hero.title2}
@@ -48,12 +54,16 @@ export default function Hero() {
               {t.hero.cta3}
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Center Portrait */}
-        <div className="relative w-full flex justify-center md:absolute md:left-[52%] md:-translate-x-1/2 md:bottom-0 md:h-screen z-10 mt-16 md:mt-0 pointer-events-none">
-
-          
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative w-full flex justify-center md:absolute md:left-[52%] md:-translate-x-1/2 md:bottom-0 md:h-screen z-10 mt-16 md:mt-0 pointer-events-none"
+        >
           <div className="relative w-full max-w-[350px] md:max-w-none md:w-auto h-full aspect-[3/4] md:aspect-auto flex justify-center pointer-events-auto transform lg:scale-[1.15] origin-bottom z-10">
             <img
               src="/IMG_2089-Photoroom.png"
@@ -63,11 +73,16 @@ export default function Hero() {
             {/* Fade at bottom */}
             <div className="absolute inset-x-0 bottom-[-2px] h-[40%] bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none" />
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Content Panel (Badges Showcase) - Hidden on mobile */}
-        <div className="hidden md:flex flex-col items-end justify-center gap-6 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 z-20 md:w-[35%] lg:w-[30%]">
-          
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden md:flex flex-col items-end justify-center gap-6 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 z-20 md:w-[35%] lg:w-[30%]"
+        >
           <div className="flex flex-col gap-4 w-full max-w-[280px]">
             <div className="p-4 border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm rounded-sm flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
@@ -110,7 +125,7 @@ export default function Hero() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
 

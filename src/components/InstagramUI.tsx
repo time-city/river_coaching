@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from './LanguageContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -130,7 +131,13 @@ export default function InstagramUI({
       <div className="max-w-7xl mx-auto">
         
         {/* Header Layout */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-12 gap-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-12 gap-6"
+        >
           {/* Left Side: Heading */}
           <h2 className="font-impact text-3xl sm:text-4xl md:text-5xl text-[#a1a1aa] tracking-wider uppercase text-center md:text-left leading-[1.15] md:leading-tight">
             {t.igsection.title}
@@ -167,7 +174,7 @@ export default function InstagramUI({
               <span>{t.igsection.follow}</span>
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Swiper Slider or Skeleton Fallback */}
         {(!posts || posts.length === 0) ? (
@@ -177,7 +184,11 @@ export default function InstagramUI({
             ))}
           </div>
         ) : (
-          <div 
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="w-full relative group/slider"
             onMouseEnter={() => swiperInstance?.autoplay?.stop()}
             onMouseLeave={() => isSectionInView && swiperInstance?.autoplay?.start()}
@@ -274,7 +285,7 @@ export default function InstagramUI({
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   </section>
