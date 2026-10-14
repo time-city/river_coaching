@@ -83,10 +83,10 @@ export default function PricingSection() {
                 transition={{ duration: 0.4 }}
                 className="w-full"
               >
-                <div className="text-center mb-10">
-                  <p className="text-zinc-400 max-w-2xl mx-auto">{t.pricing.offlineDesc}</p>
+                <div className="text-center mb-6 md:mb-10">
+                  <p className="text-zinc-400 text-sm md:text-base max-w-2xl mx-auto">{t.pricing.offlineDesc}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
                   {offlinePackages.map((pkg, i) => (
                     <PricingCard 
                       key={i} 
@@ -103,6 +103,17 @@ export default function PricingSection() {
                     />
                   ))}
                 </div>
+                {/* Mobile Shared Benefits Bar */}
+                <div className="md:hidden mt-5 p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800 text-center">
+                  <span className="text-[11px] font-bold text-white uppercase tracking-wider block mb-1">
+                    {lang === 'en' ? '★ ALL PACKAGES INCLUDE' : '★ MỌI GÓI TẬP ĐỀU BAO GỒM'}
+                  </span>
+                  <p className="text-[11px] text-zinc-400 leading-relaxed">
+                    {lang === 'en' 
+                      ? 'Personalized nutrition • 1-on-1 form coaching • Weekly check-ins • 24/7 direct Q&A' 
+                      : 'Thực đơn dinh dưỡng cá nhân hoá • Kèm sửa form 1:1 • Theo dõi chỉ số hàng tuần • Hỗ trợ trực tiếp từ HLV'}
+                  </p>
+                </div>
               </motion.div>
             )}
 
@@ -115,10 +126,10 @@ export default function PricingSection() {
                 transition={{ duration: 0.4 }}
                 className="w-full"
               >
-                <div className="text-center mb-10">
-                  <p className="text-zinc-400 max-w-2xl mx-auto">{t.pricing.onlineCallDesc}</p>
+                <div className="text-center mb-6 md:mb-10">
+                  <p className="text-zinc-400 text-sm md:text-base max-w-2xl mx-auto">{t.pricing.onlineCallDesc}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
                   {onlineCallPackages.map((pkg, i) => (
                     <PricingCard 
                       key={i} 
@@ -135,6 +146,17 @@ export default function PricingSection() {
                     />
                   ))}
                 </div>
+                {/* Mobile Shared Benefits Bar */}
+                <div className="md:hidden mt-5 p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800 text-center">
+                  <span className="text-[11px] font-bold text-white uppercase tracking-wider block mb-1">
+                    {lang === 'en' ? '★ ALL PACKAGES INCLUDE' : '★ MỌI GÓI TẬP ĐỀU BAO GỒM'}
+                  </span>
+                  <p className="text-[11px] text-zinc-400 leading-relaxed">
+                    {lang === 'en' 
+                      ? 'Live workout video call • Custom meal plans • Weekly progress analysis • Continuous adjustments' 
+                      : 'Video call trực tiếp buổi tập • Thực đơn ăn uống cá nhân • Đánh giá form hàng tuần • Điều chỉnh giáo án liên tục'}
+                  </p>
+                </div>
               </motion.div>
             )}
 
@@ -147,10 +169,10 @@ export default function PricingSection() {
                 transition={{ duration: 0.4 }}
                 className="w-full"
               >
-                <div className="text-center mb-10">
-                  <p className="text-zinc-400 max-w-2xl mx-auto">{t.pricing.planOnlyDesc}</p>
+                <div className="text-center mb-6 md:mb-10">
+                  <p className="text-zinc-400 text-sm md:text-base max-w-2xl mx-auto">{t.pricing.planOnlyDesc}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
                   {onlineNoCallPackages.map((pkg, i) => (
                     <PricingCard 
                       key={i} 
@@ -167,6 +189,17 @@ export default function PricingSection() {
                       features={(t as any).pricing.featuresOnlineNoCall || []}
                     />
                   ))}
+                </div>
+                {/* Mobile Shared Benefits Bar */}
+                <div className="md:hidden mt-5 p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800 text-center">
+                  <span className="text-[11px] font-bold text-white uppercase tracking-wider block mb-1">
+                    {lang === 'en' ? '★ ALL PACKAGES INCLUDE' : '★ MỌI GÓI TẬP ĐỀU BAO GỒM'}
+                  </span>
+                  <p className="text-[11px] text-zinc-400 leading-relaxed">
+                    {lang === 'en' 
+                      ? 'Detailed training split • Macro & nutrition protocol • Video form review • Direct messaging support' 
+                      : 'Lịch tập chi tiết độc bản • Phân bổ macro & dinh dưỡng • Chấm sửa form qua video • Nhắn tin hỗ trợ trực tiếp'}
+                  </p>
                 </div>
               </motion.div>
             )}
@@ -203,42 +236,43 @@ function PricingCard({
   features: string[]
 }) {
   return (
-    <div className={`relative flex flex-col p-6 sm:p-8 rounded-xl transition-all duration-300 overflow-hidden group ${
+    <div className={`relative flex flex-col p-3.5 sm:p-6 md:p-8 rounded-xl md:rounded-2xl transition-all duration-300 overflow-hidden group ${
       popular 
         ? "bg-zinc-900 border-2 border-white transform md:-translate-y-4 shadow-2xl" 
         : "bg-transparent border border-zinc-800 hover:border-zinc-600"
     }`}>
       {popular && (
-        <div className="absolute top-0 left-0 w-full bg-white py-1 text-center">
-          <span className="text-[10px] font-black uppercase tracking-widest text-black">{mostPopularText}</span>
+        <div className="absolute top-0 left-0 w-full bg-white py-0.5 sm:py-1 text-center">
+          <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-black">{mostPopularText}</span>
         </div>
       )}
       
-      <h3 className={`text-lg sm:text-xl font-bold uppercase tracking-wider mb-6 text-center ${popular ? 'mt-4' : ''}`}>{title}</h3>
+      <h3 className={`text-xs sm:text-base md:text-xl font-bold uppercase tracking-wider mb-2 sm:mb-4 text-center ${popular ? 'mt-3 sm:mt-4' : ''}`}>{title}</h3>
       
-      <div className="flex flex-col items-center justify-center mb-6 h-[80px]">
-        <div className="flex items-end justify-center">
-          <span className="text-3xl sm:text-4xl md:text-5xl font-impact tracking-wider text-white">{price}</span>
-          <span className="text-base sm:text-lg font-bold text-zinc-400 mb-1 ml-1.5">{currency || "VNĐ"}</span>
+      <div className="flex flex-col items-center justify-center mb-2 sm:mb-6 min-h-[46px] sm:min-h-[70px]">
+        <div className="flex items-baseline justify-center">
+          <span className="text-xl sm:text-3xl md:text-5xl font-impact tracking-wider text-white">{price}</span>
+          <span className="text-[10px] sm:text-sm md:text-base font-bold text-zinc-400 ml-1">{currency || "VNĐ"}</span>
         </div>
-        {period && <div className="text-zinc-400 text-xs sm:text-sm font-medium mt-1">{period}</div>}
+        {period && <div className="text-zinc-400 text-[10px] sm:text-xs md:text-sm font-medium mt-0.5">{period}</div>}
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-1.5 mb-8 min-h-[46px]">
+      <div className="flex flex-col items-center justify-center gap-1 mb-3 sm:mb-6 min-h-[32px] sm:min-h-[44px]">
         {subtitle ? (
-          <div className="text-sm font-medium text-zinc-400 text-center">{subtitle}</div>
+          <div className="text-[10px] sm:text-xs md:text-sm font-medium text-zinc-400 text-center leading-tight line-clamp-1">{subtitle}</div>
         ) : (
-          <div className="text-sm font-medium text-transparent text-center select-none">-</div>
+          <div className="text-[10px] sm:text-xs md:text-sm font-medium text-transparent text-center select-none">-</div>
         )}
         {discount && (
-          <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+          <span className="text-[9px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
             {discount}
           </span>
         )}
       </div>
 
+      {/* Detailed checklist visible on desktop, hidden on mobile to keep cards compact & punchy */}
       {features && features.length > 0 && (
-        <ul className="mb-8 space-y-3">
+        <ul className="hidden md:block mb-8 space-y-3">
           {features.map((feature, idx) => (
             <li key={idx} className="flex items-start gap-3 text-sm text-zinc-300">
               <Check className="w-4 h-4 text-white mt-0.5 shrink-0" />
@@ -248,13 +282,13 @@ function PricingCard({
         </ul>
       )}
 
-      <div className="mt-auto pt-4">
+      <div className="mt-auto pt-2 sm:pt-4">
         <button 
           onClick={onClick}
-          className={`w-full py-4 px-6 rounded-sm font-sans font-bold text-sm tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 ${
+          className={`w-full py-2.5 sm:py-3.5 px-2 sm:px-6 rounded-lg font-sans font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1 shadow-sm ${
             popular 
-              ? "bg-white text-black hover:bg-zinc-200" 
-              : "bg-transparent border border-white text-white hover:bg-white hover:text-black"
+              ? "bg-white text-black hover:bg-zinc-200 font-black" 
+              : "bg-zinc-900 border border-zinc-700 text-white hover:bg-white hover:text-black"
           }`}
         >
           {cta}
