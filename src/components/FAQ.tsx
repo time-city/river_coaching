@@ -19,7 +19,7 @@ export default function FAQ() {
     <section className="w-full bg-[#0a0a0a] py-24 px-4 md:px-6 border-t border-zinc-900 relative">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-impact text-center uppercase tracking-widest text-white mb-16">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-impact text-center uppercase tracking-wider text-white leading-[1.15] md:leading-tight mb-12 md:mb-16">
           {t.faq.title}
         </h2>
 

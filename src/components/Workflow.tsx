@@ -33,7 +33,7 @@ export default function Workflow() {
     <section className="w-full py-24 bg-[#0a0a0a] text-white">
       <div className="max-w-7xl mx-auto px-6 text-center">
         
-        <h2 className="font-impact text-5xl md:text-6xl uppercase tracking-tighter leading-none mb-16">
+        <h2 className="font-impact text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[1.15] md:leading-[1.1] mb-12 md:mb-16">
           {(t as any).workflow?.title || "YOUR ROADMAP TO SUCCESS"}
         </h2>
         

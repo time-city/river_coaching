@@ -58,3 +58,36 @@ body {
   background-size: 200% 200%;
   animation: ig-gradient-shift 3s ease infinite;
 }
+
+/* Custom Swiper Pagination Styling (Sleek minimalist white/zinc pills) */
+.swiper-pagination-bullet {
+  background: #71717a !important;
+  opacity: 0.5 !important;
+  width: 8px !important;
+  height: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ffffff !important;
+  opacity: 1 !important;
+  width: 24px !important;
+  border-radius: 9999px !important;
+}
+
+/* Hide Next.js dev indicator portal ('N' circle) */
+nextjs-portal,
+[data-nextjs-dev-tools-button],
+[data-next-mark] {
+  display: none !important;
+}
+
+/* Utility to hide scrollbar on swipeable containers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

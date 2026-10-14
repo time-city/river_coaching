@@ -32,27 +32,29 @@ export default function FloatingActions() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
+    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex flex-col items-end gap-2.5 md:gap-4 pointer-events-auto">
       {/* Quick CTA Button */}
       <button 
         onClick={scrollToBooking}
-        className="group relative flex items-center justify-center w-14 h-14 bg-white text-black rounded-full shadow-lg hover:scale-110 transition-all duration-500 ease-out"
+        aria-label="Book Consultation"
+        className="group relative flex items-center justify-center w-11 h-11 md:w-14 md:h-14 bg-white text-black rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 ease-out"
       >
-        <div className="absolute inset-0 bg-white rounded-full animate-ping opacity-20 group-hover:opacity-40"></div>
-        <span className="text-2xl">⚡</span>
+        <div className="absolute inset-0 bg-white rounded-full animate-ping opacity-20 group-hover:opacity-40 pointer-events-none"></div>
+        <span className="text-xl md:text-2xl leading-none">⚡</span>
       </button>
 
       {/* Scroll To Top Button */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            initial={{ opacity: 0, y: 15, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.8 }}
+            exit={{ opacity: 0, y: 15, scale: 0.8 }}
             onClick={scrollToTop}
-            className="flex items-center justify-center w-12 h-12 bg-surface border border-zinc-700 text-white rounded-full shadow-lg hover:bg-zinc-800 hover:border-white transition-all duration-500 ease-out"
+            aria-label="Scroll to top"
+            className="flex items-center justify-center w-9 h-9 md:w-12 md:h-12 bg-zinc-900/90 backdrop-blur border border-zinc-700 text-white rounded-full shadow-xl hover:bg-zinc-800 hover:border-white transition-all duration-300"
           >
-            <span>↑</span>
+            <span className="text-xs md:text-sm font-bold">↑</span>
           </motion.button>
         )}
       </AnimatePresence>

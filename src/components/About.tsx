@@ -38,7 +38,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             className="flex flex-col justify-center"
           >
-            <h2 className="font-impact text-5xl md:text-6xl uppercase tracking-tighter leading-none mb-6">
+            <h2 className="font-impact text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[1.15] md:leading-[1.1] mb-6">
               {(t as any).about?.title || "THE DISCIPLINE BEHIND THE RESULTS"}
             </h2>
             

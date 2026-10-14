@@ -41,32 +41,34 @@ export default function PricingSection() {
   ] as const;
 
   return (
-    <section id="pricing-section" className="w-full bg-[#0a0a0a] py-24 px-6 relative z-10 border-t border-zinc-900 text-white">
+    <section id="pricing-section" className="w-full bg-[#0a0a0a] py-20 md:py-24 px-4 sm:px-6 md:px-8 relative z-10 border-t border-zinc-900 text-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-7xl font-impact uppercase tracking-wider mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-impact uppercase tracking-wider leading-[1.15] md:leading-tight mb-4 md:mb-6">
             {t.pricing.title}
           </h2>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+          <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto px-2">
             {t.pricing.subtitle}
           </p>
         </div>
 
-        {/* Custom Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`relative px-8 py-4 rounded-sm text-sm font-bold uppercase tracking-widest transition-all duration-300 overflow-hidden border ${
-                activeTab === tab.id
-                  ? "border-white bg-white text-black"
-                  : "border-zinc-800 bg-transparent text-zinc-400 hover:text-white hover:border-zinc-600"
-              }`}
-            >
-              <span className="relative z-10">{tab.label}</span>
-            </button>
-          ))}
+        {/* Responsive Custom Tabs - Scrollable Segmented Pill */}
+        <div className="w-full flex justify-center mb-12 md:mb-16 px-2">
+          <div className="inline-flex items-center gap-1.5 p-1.5 bg-zinc-900/90 backdrop-blur-md border border-zinc-800 rounded-xl overflow-x-auto max-w-full no-scrollbar shadow-2xl">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap shrink-0 flex items-center justify-center ${
+                  activeTab === tab.id
+                    ? "bg-white text-black shadow-lg font-black"
+                    : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
+                }`}
+              >
+                <span>{tab.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Pricing Content */}
@@ -201,9 +203,9 @@ function PricingCard({
   features: string[]
 }) {
   return (
-    <div className={`relative flex flex-col p-8 rounded-sm transition-all duration-300 overflow-hidden group ${
+    <div className={`relative flex flex-col p-6 sm:p-8 rounded-xl transition-all duration-300 overflow-hidden group ${
       popular 
-        ? "bg-zinc-900 border-2 border-white transform md:-translate-y-4" 
+        ? "bg-zinc-900 border-2 border-white transform md:-translate-y-4 shadow-2xl" 
         : "bg-transparent border border-zinc-800 hover:border-zinc-600"
     }`}>
       {popular && (
@@ -212,14 +214,14 @@ function PricingCard({
         </div>
       )}
       
-      <h3 className={`text-xl font-bold uppercase tracking-wider mb-6 text-center ${popular ? 'mt-4' : ''}`}>{title}</h3>
+      <h3 className={`text-lg sm:text-xl font-bold uppercase tracking-wider mb-6 text-center ${popular ? 'mt-4' : ''}`}>{title}</h3>
       
       <div className="flex flex-col items-center justify-center mb-6 h-[80px]">
         <div className="flex items-end justify-center">
-          <span className="text-4xl md:text-5xl font-impact tracking-widest text-white">{price}</span>
-          <span className="text-lg font-bold text-zinc-400 mb-1 ml-2">{currency || "VNĐ"}</span>
+          <span className="text-3xl sm:text-4xl md:text-5xl font-impact tracking-wider text-white">{price}</span>
+          <span className="text-base sm:text-lg font-bold text-zinc-400 mb-1 ml-1.5">{currency || "VNĐ"}</span>
         </div>
-        {period && <div className="text-zinc-400 font-medium mt-1">{period}</div>}
+        {period && <div className="text-zinc-400 text-xs sm:text-sm font-medium mt-1">{period}</div>}
       </div>
 
       <div className="flex flex-col items-center justify-center gap-1.5 mb-8 min-h-[46px]">

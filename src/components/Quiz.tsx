@@ -131,7 +131,7 @@ export default function Quiz() {
       
       <div className="w-full max-w-6xl mx-auto px-6 relative z-10 min-h-[60vh] flex flex-col justify-center">
         <div className="mb-12">
-        <h2 className="text-6xl md:text-8xl font-impact text-center uppercase mb-8">
+        <h2 className="text-4xl sm:text-6xl md:text-8xl font-impact text-center uppercase tracking-tight leading-[1.15] md:leading-tight mb-6 md:mb-8">
           {t.quiz.title}
         </h2>
         

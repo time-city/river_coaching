@@ -25,7 +25,7 @@ export default function Hero() {
 
         {/* Left Content Panel */}
         <div className="flex flex-col items-start md:absolute md:left-6 lg:left-12 md:top-1/2 md:-translate-y-1/2 z-20 mt-4 md:mt-0 w-full md:w-[35%] lg:w-[30%]">
-          <h2 className="font-impact text-5xl lg:text-6xl xl:text-7xl tracking-tighter leading-[1.1] uppercase text-white">
+          <h2 className="font-impact text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-[1.15] md:leading-[1.1] uppercase text-white">
             {t.hero.title1}<br />
             {t.hero.title2}
           </h2>

@@ -1,13 +1,21 @@
 import React from 'react';
 import InstagramUI from './InstagramUI';
 
-async function getFollowerCount() {
+async function getFollowerCount(): Promise<string> {
+  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+  const accountId = process.env.INSTAGRAM_ACCOUNT_ID;
+  if (!accessToken || !accountId) return '1.7K';
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/instagram`, { cache: 'no-store' });
-    if (!res.ok) throw new Error('Failed to fetch');
+    const res = await fetch(
+      `https://graph.facebook.com/v18.0/${accountId}?fields=followers_count&access_token=${accessToken}`,
+      { next: { revalidate: 3600 } }
+    );
+    if (!res.ok) return '1.7K';
     const data = await res.json();
-    return data.followers;
+    const count = data.followers_count;
+    if (count >= 1000000) return (count / 1000000).toFixed(1) + 'M';
+    if (count >= 1000) return (count / 1000).toFixed(1) + 'K';
+    return count ? count.toString() : '1.7K';
   } catch (error) {
     return '1.7K';
   }

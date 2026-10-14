@@ -30,6 +30,7 @@ function VideoCard({
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -39,7 +40,7 @@ function VideoCard({
       ([entry]) => {
         setIsInView(entry.isIntersecting);
       },
-      { threshold: 0.25 }
+      { threshold: 0.15 }
     );
 
     observer.observe(el);
@@ -58,7 +59,16 @@ function VideoCard({
   }, [isSectionInView, isInView]);
 
   return (
-    <div ref={containerRef} className="w-full h-full relative">
+    <div ref={containerRef} className="w-full h-full relative bg-zinc-950 overflow-hidden">
+      {/* Poster preview image - guarantees instant visual display on mobile */}
+      {poster && (
+        <img
+          src={poster}
+          alt="Video poster preview"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover -z-0"
+        />
+      )}
       <video
         ref={videoRef}
         src={src}
@@ -67,7 +77,10 @@ function VideoCard({
         muted
         playsInline
         preload="metadata"
-        className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 group-hover:brightness-110"
+        onLoadedData={() => setIsVideoLoaded(true)}
+        className={`w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 group-hover:brightness-110 relative z-10 ${
+          isVideoLoaded ? 'opacity-100' : 'opacity-90'
+        }`}
       />
     </div>
   );
@@ -117,9 +130,9 @@ export default function InstagramUI({
       <div className="max-w-7xl mx-auto">
         
         {/* Header Layout */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-12 gap-6">
           {/* Left Side: Heading */}
-          <h2 className="font-impact text-4xl md:text-5xl text-[#a1a1aa] tracking-widest uppercase text-center md:text-left">
+          <h2 className="font-impact text-3xl sm:text-4xl md:text-5xl text-[#a1a1aa] tracking-wider uppercase text-center md:text-left leading-[1.15] md:leading-tight">
             {t.igsection.title}
           </h2>
 
@@ -156,74 +169,92 @@ export default function InstagramUI({
           </div>
         </div>
 
-        {/* Swiper Slider */}
-        <div 
-          className="w-full relative group/slider"
-          onMouseEnter={() => swiperInstance?.autoplay?.stop()}
-          onMouseLeave={() => isSectionInView && swiperInstance?.autoplay?.start()}
-        >
-          <Swiper
-            onSwiper={setSwiperInstance}
-            modules={[Autoplay, Pagination, Navigation]}
-            spaceBetween={24}
-            slidesPerView={1}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-            speed={800}
-            autoplay={{
-              delay: 3500,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            loop={true}
-            pagination={{ clickable: true, dynamicBullets: true }}
-            navigation={{ nextEl: '.ig-next', prevEl: '.ig-prev' }}
-            className="ig-swiper w-full pt-4 pb-16 cursor-grab active:cursor-grabbing"
+        {/* Swiper Slider or Skeleton Fallback */}
+        {(!posts || posts.length === 0) ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="w-full aspect-[4/5] bg-zinc-900/60 rounded-xl animate-pulse border border-zinc-800" />
+            ))}
+          </div>
+        ) : (
+          <div 
+            className="w-full relative group/slider"
+            onMouseEnter={() => swiperInstance?.autoplay?.stop()}
+            onMouseLeave={() => isSectionInView && swiperInstance?.autoplay?.start()}
           >
-            {posts.map((post) => {
-              const isVideo = post.img.endsWith('.mov') || post.img.endsWith('.mp4');
-              return (
-                <SwiperSlide key={post.id} className="transform-gpu">
-                  <a
-                    href={post.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block relative w-full aspect-[4/5] rounded-xl overflow-hidden group border border-zinc-800 bg-[#0a0a0a]"
-                  >
-                    {isVideo ? (
-                      <VideoCard
-                        src={post.img}
-                        poster={post.poster}
-                        isSectionInView={isSectionInView}
-                      />
-                    ) : (
-                      <img
-                        src={post.img}
-                        alt={`Instagram Post ${post.id}`}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 group-hover:brightness-110"
-                      />
-                    )}
+            <Swiper
+              onSwiper={setSwiperInstance}
+              modules={[Autoplay, Pagination, Navigation]}
+              spaceBetween={20}
+              slidesPerView={1}
+              observer={true}
+              observeParents={true}
+              watchSlidesProgress={true}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 24,
+                },
+              }}
+              speed={800}
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              loop={posts.length > 2}
+              pagination={{ clickable: true, dynamicBullets: true }}
+              navigation={{ nextEl: '.ig-next', prevEl: '.ig-prev' }}
+              className="ig-swiper w-full pt-4 pb-16 cursor-grab active:cursor-grabbing"
+            >
+              {posts.map((post) => {
+                const isVideo = post.img.endsWith('.mov') || post.img.endsWith('.mp4');
+                return (
+                  <SwiperSlide key={post.id} className="transform-gpu">
+                    <a
+                      href={post.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block relative w-full aspect-[4/5] rounded-xl overflow-hidden group border border-zinc-800 bg-zinc-950 shadow-xl"
+                    >
+                      {isVideo ? (
+                        <VideoCard
+                          src={post.img}
+                          poster={post.poster}
+                          isSectionInView={isSectionInView}
+                        />
+                      ) : (
+                        <div className="relative w-full h-full bg-zinc-950">
+                          <img
+                            src={post.img}
+                            alt={`Instagram Post ${post.id}`}
+                            loading="lazy"
+                            className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 group-hover:brightness-110"
+                            onError={(e) => {
+                              e.currentTarget.style.opacity = '0.3';
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-950 -z-10" />
+                        </div>
+                      )}
 
-                    {/* Subtle overlay to enhance hover effect */}
-                    <div className="absolute inset-0 bg-[#0a0a0a]/10 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
+                      {/* Subtle overlay to enhance hover effect */}
+                      <div className="absolute inset-0 bg-[#0a0a0a]/10 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
 
-                    {/* Custom Footer for Captions */}
-                    <div className="absolute bottom-0 left-0 w-full p-6 pt-12 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
-                      <p className="text-white font-medium text-sm leading-tight mb-2 line-clamp-3">{post.caption}</p>
-                      <p className="text-zinc-400 text-xs font-bold uppercase tracking-wider">{t.igsection.viewOnIg}</p>
-                    </div>
-                  </a>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+                      {/* Custom Footer for Captions */}
+                      <div className="absolute bottom-0 left-0 w-full p-6 pt-12 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
+                        <p className="text-white font-medium text-sm leading-tight mb-2 line-clamp-3">{post.caption}</p>
+                        <p className="text-zinc-400 text-xs font-bold uppercase tracking-wider">{t.igsection.viewOnIg}</p>
+                      </div>
+                    </a>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
 
           {/* Custom Navigation Buttons (Placed OUTSIDE Swiper to avoid overflow:hidden clipping) */}
           <button 
@@ -244,7 +275,8 @@ export default function InstagramUI({
             </svg>
           </button>
         </div>
-      </div>
-    </section>
-  );
+      )}
+    </div>
+  </section>
+);
 }
