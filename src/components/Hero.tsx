@@ -65,8 +65,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Content Panel (Badges Showcase) */}
-        <div className="flex flex-col items-center md:items-end justify-center gap-6 mt-8 pb-24 md:pb-0 md:mt-0 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 z-20 w-full md:w-[35%] lg:w-[30%]">
+        {/* Right Content Panel (Badges Showcase) - Hidden on mobile */}
+        <div className="hidden md:flex flex-col items-end justify-center gap-6 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 z-20 md:w-[35%] lg:w-[30%]">
           
           <div className="flex flex-col gap-4 w-full max-w-[280px]">
             <div className="p-4 border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm rounded-sm flex items-center gap-4">
