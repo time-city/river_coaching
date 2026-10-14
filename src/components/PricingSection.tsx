@@ -35,15 +35,27 @@ export default function PricingSection() {
   };
 
   const tabs = [
-    { id: "onlineCall", label: t.pricing.onlineCall },
-    { id: "onlineNoCall", label: t.pricing.onlineNoCall },
-    { id: "offline", label: t.pricing.offline },
+    { 
+      id: "onlineCall", 
+      label: t.pricing.onlineCall,
+      shortLabel: lang === 'en' ? "WITH CALL" : "KÈM CALL"
+    },
+    { 
+      id: "onlineNoCall", 
+      label: t.pricing.onlineNoCall,
+      shortLabel: "ONLINE"
+    },
+    { 
+      id: "offline", 
+      label: t.pricing.offline,
+      shortLabel: "OFFLINE"
+    },
   ] as const;
 
   return (
     <section id="pricing-section" className="w-full bg-[#0a0a0a] py-20 md:py-24 px-4 sm:px-6 md:px-8 relative z-10 border-t border-zinc-900 text-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-impact uppercase tracking-wider leading-[1.15] md:leading-tight mb-4 md:mb-6">
             {t.pricing.title}
           </h2>
@@ -52,20 +64,25 @@ export default function PricingSection() {
           </p>
         </div>
 
-        {/* Responsive Custom Tabs - Scrollable Segmented Pill */}
-        <div className="w-full flex justify-center mb-12 md:mb-16 px-2">
-          <div className="inline-flex items-center gap-1.5 p-1.5 bg-zinc-900/90 backdrop-blur-md border border-zinc-800 rounded-xl overflow-x-auto max-w-full no-scrollbar shadow-2xl">
+        {/* Responsive Custom Tabs - Perfectly proportional 3-column pill bar */}
+        <div className="w-full flex justify-center mb-10 md:mb-16 px-1">
+          <div className="grid grid-cols-3 w-full max-w-sm sm:max-w-xl p-1 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-2xl gap-1">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap shrink-0 flex items-center justify-center ${
+                className={`py-2.5 sm:py-3 px-1 sm:px-4 rounded-lg font-bold tracking-wider transition-all duration-300 flex items-center justify-center text-center ${
                   activeTab === tab.id
                     ? "bg-white text-black shadow-lg font-black"
                     : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
                 }`}
               >
-                <span>{tab.label}</span>
+                <span className="text-[11px] sm:hidden truncate font-bold">
+                  {tab.shortLabel}
+                </span>
+                <span className="hidden sm:inline text-xs sm:text-sm uppercase font-bold">
+                  {tab.label}
+                </span>
               </button>
             ))}
           </div>
@@ -241,13 +258,20 @@ function PricingCard({
         ? "bg-zinc-900 border-2 border-white transform md:-translate-y-4 shadow-2xl" 
         : "bg-transparent border border-zinc-800 hover:border-zinc-600"
     }`}>
-      {popular && (
-        <div className="absolute top-0 left-0 w-full bg-white py-0.5 sm:py-1 text-center">
-          <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-black">{mostPopularText}</span>
-        </div>
-      )}
+      {/* Popular badge header - dedicated slot above title so it NEVER covers the title text */}
+      <div className="flex justify-center items-center h-5 sm:h-6 mb-1 sm:mb-2">
+        {popular ? (
+          <span className="px-2.5 sm:px-3 py-0.5 rounded-full bg-white text-black text-[9px] sm:text-[10px] font-black uppercase tracking-wider shadow-sm">
+            {mostPopularText}
+          </span>
+        ) : (
+          <span className="opacity-0 select-none text-[9px] sm:text-[10px] py-0.5" aria-hidden="true">
+            &nbsp;
+          </span>
+        )}
+      </div>
       
-      <h3 className={`text-xs sm:text-base md:text-xl font-bold uppercase tracking-wider mb-2 sm:mb-4 text-center ${popular ? 'mt-3 sm:mt-4' : ''}`}>{title}</h3>
+      <h3 className="text-xs sm:text-base md:text-xl font-bold uppercase tracking-wider mb-2 sm:mb-4 text-center">{title}</h3>
       
       <div className="flex flex-col items-center justify-center mb-2 sm:mb-6 min-h-[46px] sm:min-h-[70px]">
         <div className="flex items-baseline justify-center">
