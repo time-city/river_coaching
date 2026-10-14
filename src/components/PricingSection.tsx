@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 
 export default function PricingSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [activeTab, setActiveTab] = useState<"offline" | "onlineCall" | "onlineNoCall">("onlineCall");
 
   const offlinePackages = [
@@ -24,14 +24,14 @@ export default function PricingSection() {
   ];
 
   const onlineNoCallPackages = [
-    { duration: 1, price: "999.000", perMonth: "999.000" },
-    { duration: 3, price: "2.699.000", perMonth: "899.000", popular: true },
-    { duration: 6, price: "4.799.000", perMonth: "799.000" },
-    { duration: 12, price: "8.399.000", perMonth: "699.000" },
+    { duration: 1, price: "1.199.000", perMonth: "1.199.000" },
+    { duration: 3, price: "3.199.000", perMonth: "1.066.000", popular: true, discount: "11%" },
+    { duration: 6, price: "5.899.000", perMonth: "983.000", discount: "18%" },
+    { duration: 12, price: "9.999.000", perMonth: "833.000", discount: "30%" },
   ];
 
   const handleBook = () => {
-    document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' });
+    window.dispatchEvent(new Event('openConsultModal'));
   };
 
   const tabs = [
@@ -90,11 +90,12 @@ export default function PricingSection() {
                       key={i} 
                       title={`${pkg.sessions} ${t.pricing.daysWeek}`} 
                       price={pkg.price} 
-                      subtitle={`~ ${pkg.perSession}đ ${t.pricing.perSession}`}
+                      subtitle={`~ ${pkg.perSession}${lang === 'en' ? ' VND' : 'đ'} ${t.pricing.perSession}`}
                       popular={pkg.popular}
                       onClick={handleBook}
                       cta={t.pricing.cta}
                       period={t.pricing.perMonth}
+                      currency={lang === 'en' ? 'VND' : 'VNĐ'}
                       mostPopularText={t.pricing.mostPopular}
                       features={(t as any).pricing.featuresOffline || []}
                     />
@@ -121,11 +122,12 @@ export default function PricingSection() {
                       key={i} 
                       title={`${pkg.days} ${t.pricing.daysWeek}`} 
                       price={pkg.price} 
-                      subtitle={`~ ${pkg.perSession}đ ${t.pricing.perSession}`}
+                      subtitle={`~ ${pkg.perSession}${lang === 'en' ? ' VND' : 'đ'} ${t.pricing.perSession}`}
                       popular={pkg.popular}
                       onClick={handleBook}
                       cta={t.pricing.cta}
                       period={t.pricing.perMonth}
+                      currency={lang === 'en' ? 'VND' : 'VNĐ'}
                       mostPopularText={t.pricing.mostPopular}
                       features={(t as any).pricing.featuresOnlineCall || []}
                     />
@@ -152,11 +154,13 @@ export default function PricingSection() {
                       key={i} 
                       title={`${pkg.duration} ${pkg.duration === 1 ? t.pricing.month : t.pricing.months}`} 
                       price={pkg.price} 
-                      subtitle={pkg.duration > 1 ? `~ ${pkg.perMonth}đ ${t.pricing.perMonth}` : ""}
+                      subtitle={pkg.duration > 1 ? `~ ${pkg.perMonth}${lang === 'en' ? ' VND' : 'đ'} ${t.pricing.perMonth}` : ""}
+                      discount={pkg.discount ? (lang === "en" ? `Save ~${pkg.discount}` : `Giảm ~${pkg.discount}`) : undefined}
                       popular={pkg.popular}
                       onClick={handleBook}
                       cta={t.pricing.cta}
                       period={pkg.duration === 1 ? t.pricing.perMonth : undefined}
+                      currency={lang === 'en' ? 'VND' : 'VNĐ'}
                       mostPopularText={t.pricing.mostPopular}
                       features={(t as any).pricing.featuresOnlineNoCall || []}
                     />
@@ -175,21 +179,25 @@ function PricingCard({
   title, 
   price, 
   subtitle, 
+  discount,
   period,
   popular, 
   onClick, 
   cta,
   mostPopularText,
+  currency,
   features
 }: { 
   title: string, 
   price: string, 
   subtitle?: string, 
+  discount?: string,
   period?: string,
   popular?: boolean, 
   onClick: () => void, 
   cta: string,
   mostPopularText: string,
+  currency?: string,
   features: string[]
 }) {
   return (
@@ -209,16 +217,23 @@ function PricingCard({
       <div className="flex flex-col items-center justify-center mb-6 h-[80px]">
         <div className="flex items-end justify-center">
           <span className="text-4xl md:text-5xl font-impact tracking-widest text-white">{price}</span>
-          <span className="text-lg font-bold text-zinc-400 mb-1 ml-2">VNĐ</span>
+          <span className="text-lg font-bold text-zinc-400 mb-1 ml-2">{currency || "VNĐ"}</span>
         </div>
         {period && <div className="text-zinc-400 font-medium mt-1">{period}</div>}
       </div>
 
-      {subtitle ? (
-        <div className="text-sm font-medium text-zinc-400 mb-8 text-center h-6">{subtitle}</div>
-      ) : (
-        <div className="h-6 mb-8"></div>
-      )}
+      <div className="flex flex-col items-center justify-center gap-1.5 mb-8 min-h-[46px]">
+        {subtitle ? (
+          <div className="text-sm font-medium text-zinc-400 text-center">{subtitle}</div>
+        ) : (
+          <div className="text-sm font-medium text-transparent text-center select-none">-</div>
+        )}
+        {discount && (
+          <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+            {discount}
+          </span>
+        )}
+      </div>
 
       {features && features.length > 0 && (
         <ul className="mb-8 space-y-3">

@@ -29,7 +29,7 @@ const igPosts: IGPost[] = [
   {
     id: 2,
     type: "video",
-    mediaUrl: "/post2.mov",
+    mediaUrl: "/post2.mp4",
     link: "https://www.instagram.com/p/DYMwYbHy66j/",
     caption: "12dayouts #danang #vietnamchampionshowdown2026",
   },
@@ -126,7 +126,7 @@ export default function IGSlider() {
                   {/* Custom Footer */}
                   <div className="absolute bottom-0 left-0 w-full p-6 pt-12 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <p className="text-white font-medium text-sm leading-tight mb-2 line-clamp-3">{post.caption}</p>
-                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-wider">Xem trên Instagram</p>
+                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-wider">{(t as any).igsection?.viewOnIg || "View on Instagram"}</p>
                   </div>
                 </a>
               </SwiperSlide>

@@ -6,7 +6,7 @@ import { X, CheckCircle2, ChevronRight, QrCode } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
 export default function PromoModal() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
 
@@ -54,6 +54,21 @@ export default function PromoModal() {
     if (step === 2) {
       // Validate basic form before moving to payment
       if (!name || !phone) return;
+      try {
+        fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'promo',
+            name: name.trim(),
+            phone: phone.trim(),
+            height: height.trim(),
+            weight: weight.trim(),
+            goal: goal === 'lose' ? 'Giảm mỡ' : 'Tăng cơ',
+            details: 'Đăng ký gói Giáo án 699k (Chuyển sang bước thanh toán)',
+          }),
+        }).catch(() => {});
+      } catch (e) {}
     }
     setStep((prev) => (prev + 1) as 1 | 2 | 3 | 4);
   };
@@ -227,7 +242,7 @@ export default function PromoModal() {
                 {/* QR Code Placeholder */}
                 <div className="w-48 h-48 bg-white p-2 rounded-xl mb-6 flex items-center justify-center flex-col gap-2">
                   <QrCode className="w-16 h-16 text-black" />
-                  <span className="text-black font-bold text-xs">QR MÃ NGÂN HÀNG</span>
+                  <span className="text-black font-bold text-xs">{(t.promo as any).qrText || (lang === 'en' ? "BANK TRANSFER QR CODE" : "QR MÃ NGÂN HÀNG")}</span>
                   {/* <img src="/qr-code.png" alt="QR Code" className="w-full h-full object-cover" /> */}
                 </div>
 

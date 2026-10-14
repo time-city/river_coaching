@@ -7,6 +7,7 @@ import LanguageToggle from "@/components/LanguageToggle";
 import FloatingActions from "@/components/FloatingActions";
 import SalesPopup from "@/components/SalesPopup";
 import PromoModal from "@/components/PromoModal";
+import ConsultModal from "@/components/ConsultModal";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -14,12 +15,12 @@ const inter = Inter({
 });
 
 const oswald = Oswald({
-  weight: ["500", "700"],
   subsets: ["latin", "vietnamese"],
   variable: "--font-oswald",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://rivercoaching.vn'),
   title: "RIVER | Coaching Profile",
   description: "Magazine High-Impact Athletic Coaching Profile",
   openGraph: {
@@ -55,6 +56,7 @@ export default function RootLayout({
           <FloatingActions />
           <SalesPopup />
           <PromoModal />
+          <ConsultModal />
           {children}
         </LanguageProvider>
         <Analytics />

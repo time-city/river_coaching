@@ -3,7 +3,7 @@ import IntroLoader from "@/components/IntroLoader";
 import About from "@/components/About";
 import Workflow from "@/components/Workflow";
 import Quiz from "@/components/Quiz";
-import Calculator from "@/components/Calculator";
+// import Calculator from "@/components/Calculator";
 import PricingSection from "@/components/PricingSection";
 import InstagramSection from "@/components/InstagramSection";
 import FeedbackSection from "@/components/FeedbackSection";
@@ -19,7 +19,7 @@ export default function Home() {
       <Workflow />
       <PricingSection />
       <FeedbackSection />
-      <Calculator />
+      {/* <Calculator /> */}
       <Quiz />
       <InstagramSection />
       <FAQ />

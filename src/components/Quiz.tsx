@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "./LanguageContext";
 
 export default function Quiz() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [currentStep, setCurrentStep] = useState(0);
   const isTransitioningRef = useRef(false);
   const [answers, setAnswers] = useState<Record<number, number>>({});
@@ -19,7 +19,9 @@ export default function Quiz() {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
   const handleConsultNow = () => {
-    document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' });
+    if (height) sessionStorage.setItem('calc_height', height);
+    if (weight) sessionStorage.setItem('calc_weight', weight);
+    window.dispatchEvent(new Event('openConsultModal'));
   };
 
   const baseQuestions = [
@@ -67,19 +69,25 @@ export default function Quiz() {
   const serviceIndex = answers[4];
   const callIndex = answers[5];
 
+  const sessionWord = (t.quiz as any).sessionsWord || (lang === 'en' ? "Sessions" : "Buổi");
+  const singleSessionWord = (t.quiz as any).sessionWord || (lang === 'en' ? "Session" : "Buổi");
+  const monthWord = (t.quiz as any).monthWord || (lang === 'en' ? "Month" : "Tháng");
+  const currencyUnit = lang === 'en' ? "VND" : "VNĐ";
+  const currencySymbol = lang === 'en' ? " VND" : "đ";
+
   if (serviceIndex === 0) {
-    if (daysIndex === 0) { finalPrice = "2.999.000 VNĐ / 12 Buổi"; perSessionPrice = "~ 250.000đ / Buổi"; }
-    else if (daysIndex === 1) { finalPrice = "3.499.000 VNĐ / 16 Buổi"; perSessionPrice = "~ 218.000đ / Buổi"; }
-    else if (daysIndex === 2) { finalPrice = "3.999.000 VNĐ / 20 Buổi"; perSessionPrice = "~ 200.000đ / Buổi"; }
-    else if (daysIndex === 3) { finalPrice = "4.499.000 VNĐ / 24 Buổi"; perSessionPrice = "~ 187.000đ / Buổi"; }
+    if (daysIndex === 0) { finalPrice = `2.999.000 ${currencyUnit} / 12 ${sessionWord}`; perSessionPrice = `~ 250.000${currencySymbol} / ${singleSessionWord}`; }
+    else if (daysIndex === 1) { finalPrice = `3.499.000 ${currencyUnit} / 16 ${sessionWord}`; perSessionPrice = `~ 218.000${currencySymbol} / ${singleSessionWord}`; }
+    else if (daysIndex === 2) { finalPrice = `3.999.000 ${currencyUnit} / 20 ${sessionWord}`; perSessionPrice = `~ 200.000${currencySymbol} / ${singleSessionWord}`; }
+    else if (daysIndex === 3) { finalPrice = `4.499.000 ${currencyUnit} / 24 ${sessionWord}`; perSessionPrice = `~ 187.000${currencySymbol} / ${singleSessionWord}`; }
   } else if (serviceIndex === 1) {
     if (callIndex === 0) {
-      if (daysIndex === 0) { finalPrice = "1.999.000 VNĐ / Tháng"; perSessionPrice = "~ 166.000đ / Buổi"; }
-      else if (daysIndex === 1) { finalPrice = "2.499.000 VNĐ / Tháng"; perSessionPrice = "~ 156.000đ / Buổi"; }
-      else if (daysIndex === 2) { finalPrice = "2.999.000 VNĐ / Tháng"; perSessionPrice = "~ 150.000đ / Buổi"; }
-      else if (daysIndex === 3) { finalPrice = "3.499.000 VNĐ / Tháng"; perSessionPrice = "~ 145.000đ / Buổi"; }
+      if (daysIndex === 0) { finalPrice = `1.999.000 ${currencyUnit} / ${monthWord}`; perSessionPrice = `~ 166.000${currencySymbol} / ${singleSessionWord}`; }
+      else if (daysIndex === 1) { finalPrice = `2.499.000 ${currencyUnit} / ${monthWord}`; perSessionPrice = `~ 156.000${currencySymbol} / ${singleSessionWord}`; }
+      else if (daysIndex === 2) { finalPrice = `2.999.000 ${currencyUnit} / ${monthWord}`; perSessionPrice = `~ 150.000${currencySymbol} / ${singleSessionWord}`; }
+      else if (daysIndex === 3) { finalPrice = `3.499.000 ${currencyUnit} / ${monthWord}`; perSessionPrice = `~ 145.000${currencySymbol} / ${singleSessionWord}`; }
     } else if (callIndex === 1) {
-      finalPrice = "999.000 VNĐ / Tháng";
+      finalPrice = `999.000 ${currencyUnit} / ${monthWord}`;
       perSessionPrice = "";
     }
   }
@@ -181,7 +189,7 @@ export default function Quiz() {
                           type="text"
                           value={customValue}
                           onChange={(e) => setCustomValue(e.target.value)}
-                          placeholder="..."
+                          placeholder={(t.quiz as any).customPlaceholder || (lang === 'en' ? "Please specify details..." : "Ghi rõ cụ thể...")}
                           className="w-full bg-transparent border-none outline-none text-white placeholder-zinc-500 font-normal"
                           onKeyDown={(e) => {
                             if (e.key === 'Enter' && customValue.trim() !== '') {
@@ -199,7 +207,7 @@ export default function Quiz() {
                         disabled={customValue.trim() === ''}
                         className="relative z-10 px-6 py-4 sm:py-6 bg-zinc-900 border-l border-zinc-800 text-white font-bold hover:bg-white hover:text-black transition-all duration-500 ease-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[120px]"
                       >
-                        {t.quiz.step === "Bước" ? "Xác nhận" : "Confirm"}
+                        {(t.quiz as any).confirm || (lang === 'en' ? "Confirm" : "Xác nhận")}
                       </button>
                     </div>
                   ) : (
@@ -265,7 +273,7 @@ export default function Quiz() {
                                   customAns && q.options[ansIndex].startsWith('Khác') || (q.options[ansIndex].startsWith('Other'))
                                     ? `${q.options[ansIndex].split(/[:(]/)[0].trim()}: ${customAns}`
                                     : q.options[ansIndex]
-                                ) : "-- Select --"}
+                                ) : ((t.quiz as any).selectPlaceholder || (lang === 'en' ? "-- Select --" : "-- Chọn --"))}
                                 <span className={`absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-white/70 text-[10px] pb-1 transition-transform duration-300 ${openDropdown === i ? 'rotate-180' : ''}`}>▼</span>
                               </div>
                               

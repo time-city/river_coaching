@@ -13,13 +13,12 @@ export default function Hero() {
 
       {/* Deep Background Text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-        <h1 className="text-[22vw] md:text-[20vw] font-impact tracking-widest leading-none text-white opacity-5 select-none whitespace-nowrap">
+        <h1 className="text-[22vw] md:text-[20vw] font-sans font-black tracking-tighter leading-none text-white opacity-[0.03] select-none whitespace-nowrap">
           {t.hero.background}
         </h1>
       </div>
 
-      {/* Vignette Shadow from edges */}
-      <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_#050505_100%)]"></div>
+      {/* Removed Vignette Shadow as requested */}
 
       {/* Container */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 h-full flex flex-col md:block">
@@ -53,11 +52,13 @@ export default function Hero() {
 
         {/* Center Portrait */}
         <div className="relative w-full flex justify-center md:absolute md:left-[52%] md:-translate-x-1/2 md:bottom-0 md:h-screen z-10 mt-16 md:mt-0 pointer-events-none">
-          <div className="relative w-full max-w-[350px] md:max-w-none md:w-auto h-full aspect-[3/4] md:aspect-auto flex justify-center pointer-events-auto transform lg:scale-[1.15] origin-bottom">
+
+          
+          <div className="relative w-full max-w-[350px] md:max-w-none md:w-auto h-full aspect-[3/4] md:aspect-auto flex justify-center pointer-events-auto transform lg:scale-[1.15] origin-bottom z-10">
             <img
               src="/IMG_2089-Photoroom.png"
               alt="Coach River"
-              className="w-full md:w-auto h-full object-cover object-bottom"
+              className="w-full md:w-auto h-full object-cover object-bottom drop-shadow-[0_0_50px_rgba(255,255,255,0.25)]"
             />
             {/* Fade at bottom */}
             <div className="absolute inset-x-0 bottom-[-2px] h-[40%] bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none" />

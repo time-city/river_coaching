@@ -20,7 +20,7 @@ export const translations = {
       background: "RIVER",
       title1: "ELITE COACHING.",
       title2: "REAL RESULTS.",
-      description: "1-on-1 body transformation solutions, flexible in both formats: Personalized Online and Practical Offline. Exclusive roadmaps and nutrition plans designed based on your unique body condition – from a basic foundation to being stage-ready.",
+      description: "1-on-1 body transformation solutions, flexible in both formats: Personalized Online and Practical Offline. Exclusive roadmaps and nutrition plans designed based on your unique body condition – from a basic foundation ",
       role: "Men's Physique Athlete",
       awards: "3x Bronze VCS '26 (U21, U24, First-timer)",
       badge1: "Online Coaching 1:1",
@@ -74,7 +74,13 @@ export const translations = {
       q5: "Do you have any pre-existing medical conditions or injuries?",
       q5o1: "None, I'm fully healthy",
       q5o4: "Other (please specify)",
-      phone: "Contact Phone Number"
+      phone: "Contact Phone Number",
+      sessionsWord: "Sessions",
+      sessionWord: "Session",
+      monthWord: "Month",
+      confirm: "Confirm",
+      selectPlaceholder: "-- Select --",
+      customPlaceholder: "Please specify details..."
     },
     pricing: {
       title: "Investment in Yourself",
@@ -186,10 +192,27 @@ export const translations = {
       payAmount: "Amount: 699,000 VND",
       payContent: "Transfer content:",
       payContentFormat: "[Your Name] + [Phone]",
+      qrText: "BANK TRANSFER QR CODE",
       cta3: "I HAVE TRANSFERRED",
       successTitle: "Registration Successful!",
       successDesc: "Your request has been received. Coach River will contact you via Zalo shortly to start your onboarding process.",
       ctaClose: "CLOSE"
+    },
+    consult: {
+      title: "BOOK YOUR CONSULTATION",
+      subtitle: "Let's build your strategy",
+      ctaSubmit: "SEND & CONSULT NOW",
+      formGoal: "Primary Goal",
+      goalLose: "Fat Loss",
+      goalGain: "Muscle Building",
+      goalOther: "Other",
+      otherPlaceholder: "Specify your goal (e.g. rehab, posture, endurance...)",
+      copiedNotice: "Consultation info copied to clipboard!",
+      successTitle: "Zalo Opened!",
+      successDesc: "Your consultation info has been copied. If Zalo doesn't auto-fill, simply Paste into the chat box and send to Coach River.",
+      btnReopenZalo: "OPEN ZALO AGAIN",
+      btnCopyAgain: "COPY INFO AGAIN",
+      btnClose: "DONE & CLOSE"
     }
   },
   vi: {
@@ -211,7 +234,7 @@ export const translations = {
       background: "RIVER",
       title1: "HUẤN LUYỆN CHUYÊN BIỆT.",
       title2: "KẾT QUẢ THỰC TẾ.",
-      description: "Giải pháp kiến tạo hình thể 1 kèm 1, linh hoạt với cả hai định dạng: Online cá nhân hóa và Offline thực chiến. Thiết kế lộ trình và thực đơn độc bản dựa trên thể trạng riêng của bạn – từ nền tảng cơ bản đến khi sẵn sàng bước lên sàn đấu.",
+      description: "Giải pháp kiến tạo hình thể 1 kèm 1, linh hoạt với cả hai định dạng: Online cá nhân hóa và Offline thực chiến. Thiết kế lộ trình và thực đơn độc bản dựa trên thể trạng riêng của bạn – từ nền tảng cơ bản.",
       role: "Vận động viên Men's Physique",
       awards: "3x HCĐ VCS '26 (U21, U24, First-timer)",
       badge1: "Coaching Online 1:1",
@@ -265,7 +288,13 @@ export const translations = {
       q5: "Bạn có bệnh lý nền hay chấn thương nào không?",
       q5o1: "Không, tôi hoàn toàn khỏe mạnh",
       q5o4: "Khác (vui lòng ghi rõ)",
-      phone: "Số điện thoại liên hệ"
+      phone: "Số điện thoại liên hệ",
+      sessionsWord: "Buổi",
+      sessionWord: "Buổi",
+      monthWord: "Tháng",
+      confirm: "Xác nhận",
+      selectPlaceholder: "-- Chọn --",
+      customPlaceholder: "Ghi rõ tình trạng cụ thể..."
     },
     pricing: {
       title: "Đầu Tư Cho Bản Thân",
@@ -377,10 +406,27 @@ export const translations = {
       payAmount: "Số tiền: 699.000 VNĐ",
       payContent: "Nội dung chuyển khoản:",
       payContentFormat: "[Tên của bạn] + [SĐT]",
+      qrText: "QR MÃ NGÂN HÀNG",
       cta3: "TÔI ĐÃ CHUYỂN KHOẢN",
       successTitle: "Đăng Ký Thành Công!",
       successDesc: "Hệ thống đã ghi nhận. HLV River sẽ liên hệ với bạn qua Zalo trong thời gian sớm nhất để bắt đầu.",
       ctaClose: "ĐÓNG CỬA SỔ"
+    },
+    consult: {
+      title: "ĐẶT LỊCH TƯ VẤN",
+      subtitle: "Xây dựng chiến lược cho riêng bạn",
+      ctaSubmit: "GỬI THÔNG TIN & NHẬN TƯ VẤN",
+      formGoal: "Mục Tiêu Chính",
+      goalLose: "Giảm mỡ",
+      goalGain: "Tăng cơ",
+      goalOther: "Khác",
+      otherPlaceholder: "Nhập mục tiêu cụ thể (ví dụ: cải thiện tư thế, phục hồi, tăng thể lực...)",
+      copiedNotice: "Đã sao chép thông tin tư vấn!",
+      successTitle: "Đã Mở Zalo Thành Công!",
+      successDesc: "Thông tin của bạn đã được sao chép vào bộ nhớ tạm. Khi Zalo mở ra, bạn chỉ cần Dán (Paste) vào khung chat và bấm Gửi cho Coach River nhé.",
+      btnReopenZalo: "MỞ LẠI ZALO",
+      btnCopyAgain: "SAO CHÉP LẠI THÔNG TIN",
+      btnClose: "HOÀN TẤT & ĐÓNG"
     }
   }
 };
