@@ -44,9 +44,18 @@ export default function About() {
             
             <div className="w-16 h-1 bg-white mb-8"></div>
             
-            <p className="text-zinc-400 font-sans text-base md:text-lg leading-relaxed mb-8">
-              {(t as any).about?.story || "From a desk-bound IT professional to a competitive Men's Physique athlete, my journey is built on one core principle: Discipline. I understand the struggles of balancing a demanding career with fitness goals because I've lived it. Now, I engineer high-performance systems for your body, turning guesswork into science."}
-            </p>
+            <div className="text-zinc-400 font-sans text-base md:text-lg leading-relaxed mb-8 space-y-4">
+              {(((t as any).about?.story || "Từ một cậu bé 1m7 chỉ nặng vỏn vẹn 40kg đến một vận động viên Men's Physique chuyên nghiệp, hành trình lột xác của tôi được xây dựng trên một nguyên tắc cốt lõi: Kỷ luật.\n\nTrải qua 5 năm rèn luyện thực chiến và 2 năm trực tiếp đồng hành cùng các học viên, tôi hiểu rõ cách cơ thể vận hành và những rào cản bạn đang gặp phải. Ở đây không có những lời động viên sáo rỗng hay các bài tập rập khuôn. Từ kinh nghiệm bứt phá giới hạn của chính mình, tôi thiết kế các hệ thống tập luyện và dinh dưỡng cá nhân hóa, giúp bạn biến những phỏng đoán mơ hồ thành khoa học chính xác.\n\nHành trình của bạn, hệ thống của tôi."))
+                .split("\n\n")
+                .map((paragraph: string, idx: number, arr: string[]) => (
+                  <p 
+                    key={idx} 
+                    className={idx === arr.length - 1 ? "text-white font-semibold italic tracking-wide pt-1" : ""}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+            </div>
             
             <div className="mt-4 border-l-4 border-white pl-4 py-2">
               <p className="font-impact text-xl md:text-2xl text-white tracking-widest uppercase">

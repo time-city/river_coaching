@@ -4,7 +4,7 @@ export const translations = {
   en: {
     about: {
       title: "THE DISCIPLINE BEHIND THE RESULTS",
-      story: "From a desk-bound IT professional to a competitive Men's Physique athlete, my journey is built on one core principle: Discipline. I understand the struggles of balancing a demanding career with fitness goals because I've lived it. Now, I engineer high-performance systems for your body, turning guesswork into science.",
+      story: "From a 1.7m teenager weighing barely 40kg to a competitive Men's Physique athlete, my transformation is built on one core principle: Discipline.\n\nWith 5 years of hands-on training and 2 years directly coaching athletes and clients, I understand how the body works and the real barriers you face. No empty hype, no cookie-cutter workouts. Drawing from my own journey of pushing past physical limits, I design personalized training and nutrition systems that turn vague guesswork into precise science.\n\nYour journey, my system.",
       signature: "— River, Elite Coach"
     },
     workflow: {
@@ -218,7 +218,7 @@ export const translations = {
   vi: {
     about: {
       title: "KỶ LUẬT ĐẰNG SAU NHỮNG THÀNH QUẢ",
-      story: "Từ một chuyên viên IT gắn chặt với bàn làm việc đến một vận động viên Men's Physique thi đấu chuyên nghiệp, hành trình của tôi được xây dựng trên một nguyên tắc cốt lõi: Kỷ luật. Tôi hiểu rõ những khó khăn khi phải cân bằng giữa công việc bận rộn và mục tiêu hình thể, bởi vì tôi đã từng như vậy. Giờ đây, tôi thiết kế các hệ thống tối ưu cho cơ thể bạn, biến phỏng đoán thành khoa học.",
+      story: "Từ một cậu bé 1m7 chỉ nặng vỏn vẹn 40kg đến một vận động viên Men's Physique chuyên nghiệp, hành trình lột xác của tôi được xây dựng trên một nguyên tắc cốt lõi: Kỷ luật.\n\nTrải qua 5 năm rèn luyện thực chiến và 2 năm trực tiếp đồng hành cùng các học viên, tôi hiểu rõ cách cơ thể vận hành và những rào cản bạn đang gặp phải. Ở đây không có những lời động viên sáo rỗng hay các bài tập rập khuôn. Từ kinh nghiệm bứt phá giới hạn của chính mình, tôi thiết kế các hệ thống tập luyện và dinh dưỡng cá nhân hóa, giúp bạn biến những phỏng đoán mơ hồ thành khoa học chính xác.\n\nHành trình của bạn, hệ thống của tôi.",
       signature: "— River, Elite Coach"
     },
     workflow: {
