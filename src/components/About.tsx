@@ -23,7 +23,7 @@ export default function About() {
             {/* Replace src with a real training image. Using placeholder logic for high-res images */}
             <img 
               src="/discipline.jpeg" 
-              alt="Coach Training" 
+              alt="River Training" 
               className="w-full h-full object-cover object-[80%_30%]"
             />
             {/* Subtle overlay */}
@@ -45,7 +45,7 @@ export default function About() {
             <div className="w-16 h-1 bg-white mb-8"></div>
             
             <div className="text-zinc-400 font-sans text-base md:text-lg leading-relaxed mb-8 space-y-4">
-              {(((t as any).about?.story || "Từ một cậu bé 1m7 chỉ nặng vỏn vẹn 40kg đến một vận động viên Men's Physique chuyên nghiệp, hành trình lột xác của tôi được xây dựng trên một nguyên tắc cốt lõi: Kỷ luật.\n\nTrải qua 5 năm rèn luyện thực chiến và 2 năm trực tiếp đồng hành cùng các học viên, tôi hiểu rõ cách cơ thể vận hành và những rào cản bạn đang gặp phải. Ở đây không có những lời động viên sáo rỗng hay các bài tập rập khuôn. Từ kinh nghiệm bứt phá giới hạn của chính mình, tôi thiết kế các hệ thống tập luyện và dinh dưỡng cá nhân hóa, giúp bạn biến những phỏng đoán mơ hồ thành khoa học chính xác.\n\nHành trình của bạn, hệ thống của tôi."))
+              {(((t as any).about?.story || "Từ một cậu bé 1m7 chỉ nặng vỏn vẹn 40kg đến một vận động viên Men's Physique, hành trình lột xác của mình được xây dựng trên một nguyên tắc cốt lõi: Kỷ luật.\n\nTrải qua 5 năm rèn luyện thực chiến và 2 năm trực tiếp đồng hành cùng các bạn, mình hiểu rõ cách cơ thể vận hành và những rào cản bạn đang gặp phải. Ở đây không có những lời động viên sáo rỗng hay các bài tập rập khuôn. Từ kinh nghiệm bứt phá giới hạn của chính mình, mình thiết kế các hệ thống tập luyện và dinh dưỡng cá nhân hóa, giúp bạn biến những phỏng đoán mơ hồ thành khoa học chính xác.\n\nHành trình của bạn, giải pháp từ mình."))
                 .split("\n\n")
                 .map((paragraph: string, idx: number, arr: string[]) => (
                   <p 
@@ -59,7 +59,7 @@ export default function About() {
             
             <div className="mt-4 border-l-4 border-white pl-4 py-2">
               <p className="font-impact text-xl md:text-2xl text-white tracking-widest uppercase">
-                {(t as any).about?.signature || "— River, Elite Coach"}
+                {(t as any).about?.signature || "— River"}
               </p>
             </div>
           </motion.div>

@@ -4,7 +4,7 @@ import React from 'react';
 import { useLanguage } from './LanguageContext';
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -19,9 +19,23 @@ export default function Footer() {
           <h2 className="text-3xl md:text-4xl font-impact tracking-widest text-white mb-2">
             {t.footer.brand}
           </h2>
-          <p className="text-zinc-500 text-sm md:text-base text-center md:text-left max-w-sm">
+          <p className="text-zinc-500 text-sm md:text-base text-center md:text-left max-w-sm mb-4">
             {t.footer.description}
           </p>
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 text-xs font-mono uppercase tracking-wider">
+            <a href="/blog" className="text-white hover:text-red-400 font-bold transition-colors flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+              River Blog
+            </a>
+            <span className="text-zinc-700">•</span>
+            <a href="/blog/giam-mo-tang-co-dong-thoi-khoa-hoc-body-recomposition" className="text-zinc-400 hover:text-white transition-colors">
+              Body Recomp
+            </a>
+            <span className="text-zinc-700">•</span>
+            <a href="/blog/toi-uu-phi-dai-co-bap-hypertrophy-3-yeu-to-cot-loi" className="text-zinc-400 hover:text-white transition-colors">
+              Hypertrophy
+            </a>
+          </div>
         </div>
 
         <div className="flex flex-col items-center gap-4">

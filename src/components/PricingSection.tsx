@@ -146,7 +146,7 @@ export default function PricingSection() {
                   <p className="text-[11px] text-zinc-400 leading-relaxed">
                     {lang === 'en' 
                       ? 'Personalized nutrition • 1-on-1 form coaching • Weekly check-ins • 24/7 direct Q&A' 
-                      : 'Thực đơn dinh dưỡng cá nhân hoá • Kèm sửa form 1:1 • Theo dõi chỉ số hàng tuần • Hỗ trợ trực tiếp từ HLV'}
+                      : 'Thực đơn dinh dưỡng cá nhân hoá • Kèm sửa form 1:1 • Theo dõi chỉ số hàng tuần • Hỗ trợ trực tiếp từ mình'}
                   </p>
                 </div>
               </motion.div>

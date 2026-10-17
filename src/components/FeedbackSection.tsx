@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from './LanguageContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -63,36 +63,32 @@ export default function FeedbackSection() {
         >
           <Swiper
             onSwiper={setSwiperInstance}
-            modules={[Autoplay, Pagination]}
-            spaceBetween={20}
+            modules={[Autoplay, Pagination, Navigation]}
+            spaceBetween={16}
             slidesPerView={1}
             observer={true}
             observeParents={true}
+            watchSlidesProgress={true}
             breakpoints={{
               640: {
                 slidesPerView: 2,
-                spaceBetween: 24,
+                spaceBetween: 20,
               },
               1024: {
                 slidesPerView: 3,
-                spaceBetween: 30,
+                spaceBetween: 28,
               },
             }}
-            speed={15000}
+            speed={600}
             autoplay={{
-              delay: 0,
+              delay: 3500,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
-            loop={true}
+            loop={feedbacks.length > 3}
             pagination={{ clickable: true, dynamicBullets: true }}
             className="feedback-swiper w-full pt-4 pb-16 cursor-grab active:cursor-grabbing"
           >
-            <style>{`
-              .feedback-swiper .swiper-wrapper {
-                transition-timing-function: linear !important;
-              }
-            `}</style>
             {feedbacks.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className="py-4 px-1">
@@ -136,8 +132,8 @@ export default function FeedbackSection() {
                     </div>
                   </div>
                   
-                  {/* Context Overlay */}
-                  <div className="absolute bottom-4 left-3 md:left-4 bg-black/60 backdrop-blur-md border border-white/20 px-2.5 py-1 md:px-3 md:py-1.5 rounded-sm z-20 shadow-xl pointer-events-none group-hover:-translate-y-2 transition-transform duration-500">
+                  {/* Context Overlay (Placed at top-left to avoid overlapping BEFORE badge) */}
+                  <div className="absolute top-3.5 left-3.5 md:top-4 md:left-4 bg-black/70 backdrop-blur-md border border-white/20 px-2.5 py-1 md:px-3 md:py-1.5 rounded-md z-20 shadow-xl pointer-events-none group-hover:-translate-y-0.5 transition-transform duration-300">
                     <span className="text-white text-[10px] md:text-xs font-bold uppercase tracking-wider">
                       {item.id % 2 === 0 ? `16 ${(t as any).feedback?.weeks || 'Weeks'} | ${(t as any).feedback?.tagMuscle || 'Muscle Building'}` : `12 ${(t as any).feedback?.weeks || 'Weeks'} | ${(t as any).feedback?.tagFatLoss || 'Fat Loss'}`}
                     </span>
@@ -147,6 +143,27 @@ export default function FeedbackSection() {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* Custom Navigation Buttons (Desktop/Tablet) */}
+          <button 
+            onClick={() => swiperInstance?.slidePrev()} 
+            className="feedback-prev absolute left-2 md:-left-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-[#0a0a0a]/70 hover:bg-[#0a0a0a] text-white rounded-full hidden md:flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all duration-300 shadow-xl backdrop-blur-sm border border-white/20 cursor-pointer"
+            aria-label="Previous Transformation"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+          
+          <button 
+            onClick={() => swiperInstance?.slideNext()} 
+            className="feedback-next absolute right-2 md:-right-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-[#0a0a0a]/70 hover:bg-[#0a0a0a] text-white rounded-full hidden md:flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all duration-300 shadow-xl backdrop-blur-sm border border-white/20 cursor-pointer"
+            aria-label="Next Transformation"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
 
         </motion.div>
       </div>

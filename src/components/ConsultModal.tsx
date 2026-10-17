@@ -23,7 +23,7 @@ export default function ConsultModal() {
   const [zaloLink, setZaloLink] = useState("");
   const [fullMessage, setFullMessage] = useState("");
   
-  // Zalo phone number of Coach River (synced with Footer 0903536212)
+  // Zalo phone number of River (synced with Footer 0903536212)
   const ZALO_PHONE = process.env.NEXT_PUBLIC_ZALO_PHONE || "0903536212"; 
 
   useEffect(() => {
@@ -61,13 +61,13 @@ export default function ConsultModal() {
                    
     const isEn = lang === 'en';
     const message = isEn
-      ? `Hello Coach River, I would like to book a consultation!\n\n`
+      ? `Hello River, I would like to book a consultation!\n\n`
         + `- Full Name: ${name.trim()}\n`
         + `- Phone: ${phone.trim()}\n`
         + `- Height: ${height ? height.trim() + ' cm' : 'Not specified'}\n`
         + `- Weight: ${weight ? weight.trim() + ' kg' : 'Not specified'}\n`
         + `- Goal: ${goalText}`
-      : `Xin chào HLV River, tôi muốn đăng ký tư vấn!\n\n`
+      : `Xin chào River, mình muốn đăng ký tư vấn!\n\n`
         + `- Họ và tên: ${name.trim()}\n`
         + `- SĐT: ${phone.trim()}\n`
         + `- Chiều cao: ${height ? height.trim() + ' cm' : 'Chưa nhập'}\n`

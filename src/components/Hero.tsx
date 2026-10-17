@@ -67,7 +67,7 @@ export default function Hero() {
           <div className="relative w-full max-w-[350px] md:max-w-none md:w-auto h-full aspect-[3/4] md:aspect-auto flex justify-center pointer-events-auto transform lg:scale-[1.15] origin-bottom z-10">
             <img
               src="/IMG_2089-Photoroom.png"
-              alt="Coach River"
+              alt="River"
               className="w-full md:w-auto h-full object-cover object-bottom drop-shadow-[0_0_50px_rgba(255,255,255,0.25)]"
             />
             {/* Fade at bottom */}
